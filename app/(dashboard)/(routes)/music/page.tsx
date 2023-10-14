@@ -17,16 +17,12 @@ import OpenAI from 'openai'
 
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
-
-import { cn } from "@/lib/utils"
-import { UserAvatar } from '@/components/user-avatar';
-import { BotAvatar } from '@/components/bot-avatar';
+import { redirectToSignUp } from '@clerk/nextjs';
 
 
-
-const ConversationPage = () => {
+const MusicPage = () => {
     const router = useRouter()
-    const [messages, setMessages] = useState<any[]>([]);
+    const [music, setMusic] = useState<string>();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -39,17 +35,11 @@ const ConversationPage = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: OpenAI.Chat.ChatCompletionMessage = {
-                role: "user",
-                content: values.prompt,
-            }
-            const newMessages = [...messages, userMessage]
+            setMusic(undefined);
 
-            const response = await axios.post("/api/conversation", {
-                messages: newMessages
-            })
+            const response = await axios.post("/api/music", values)
 
-            setMessages((current) => [...current, userMessage, response.data])
+            setMusic(response.data.audio)
             form.reset()
 
         } catch (error: any) {
@@ -62,7 +52,7 @@ const ConversationPage = () => {
 
   return (
     <div>
-        <Heading title="Music Generation" description="Turn your prompt into music." icon={Music} iconColor="text-violet-500" bgColor="bg-violet-500/10" />
+        <Heading title="Music Generation" description="Turn your prompt into music." icon={Music} iconColor="text-emerald-500" bgColor="bg-emerald-500/10" />
         <div className='px-4 lg:px-8'>
             <div>
                 <Form {...form}>
@@ -70,7 +60,7 @@ const ConversationPage = () => {
                         <FormField name="prompt" render={({field}) => (
                             <FormItem className='col-span-12 lg:col-span-10'>
                                 <FormControl className="m-0 p-0">
-                                    <Input className="border-0 outline-none focus-visible:ring-transparent" disabled={isLoading} placeholder='I want to generate an idea...' {...field} />
+                                    <Input className="border-0 outline-none focus-visible:ring-transparent" disabled={isLoading} placeholder='Piano Solo' {...field} />
                                 </FormControl>
                             </FormItem>
 
@@ -88,24 +78,18 @@ const ConversationPage = () => {
                         <Loader />
                     </div>
                 )}
-                {messages.length === 0 && !isLoading && (
-                    <Empty label="No Conversation Started" />
+                {!music && !isLoading && (
+                    <Empty label="No Music Generated" />
                 )}
 
-                <div className="flex flex-col-reverse gap-y-4">
-                    {messages.map((message) => (
-                        <div className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")} key={message.content}>
-                            {message.role === "user" ? <UserAvatar /> : <BotAvatar /> }
-                            <p className="text-sm">
-                                {message.content}
-                            </p>
-                        </div>
-                    ))}
+                <div>
+                    Music will be generated here
                 </div>
+                
             </div>
         </div>
     </div>
   )
 }
 
-export default ConversationPage
+export default MusicPage;
