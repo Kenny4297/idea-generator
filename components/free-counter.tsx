@@ -7,6 +7,9 @@ import { Progress } from "./ui/progress";
 import { Button } from "./ui/button";
 import { Zap } from "lucide-react";
 import { useProModal } from "@/hooks/use-pro-model";
+import Timer from "./timer";
+import { getApiLimitCount } from "@/lib/api-limit";
+
 
 interface FreeCounterProps {
     apiLimitCount: number
@@ -18,30 +21,49 @@ export const FreeCounter = ({apiLimitCount = 0}: FreeCounterProps) => {
     
     const [mounted, setMounted] = useState(false);
 
+    const [showTimer, setShowTimer] = useState(false);
+
+    const [limitCount, setLimitCount] = useState<number>(apiLimitCount);
+
     useEffect(() => {
         setMounted(true)
         console.log("the Api limit count is", apiLimitCount)
     }, [])
+
+    useEffect(() => {
+        if (apiLimitCount >= MAX_FREE_COUNTS) {
+            setShowTimer(true);
+        }
+    }, [apiLimitCount]);
+
+    const handleTimerEnd = async (updatedCount: number) => {
+        // This function is triggered when the timer ends
+        // You can re-fetch the `apiLimitCount` from your server or simply set it to 0
+        setLimitCount(updatedCount); // Assuming you want to reset it
+    };
+    
 
     if (!mounted) {
         return null;
     }
 
     return (
-        <div className="px-3">
+        <div className="px-3 pb-5">
             <Card className="bg-white/10 border-0">
                 <CardContent className="py-6">
                     <div className="text-center text-sm text-white mb-4 space-y-2"> 
                         <p>
-                            {apiLimitCount} / {MAX_FREE_COUNTS} FREE GENERATIONS
+                            {limitCount} / {MAX_FREE_COUNTS} FREE GENERATIONS
                         </p>
 
                         <Progress className="h-3" value={apiLimitCount / MAX_FREE_COUNTS * 100 }  />
                     </div>
-                    <Button onClick={proModal.onOpen} className="w-full" variant="premium">
-                        Upgrade
+                    {/* <Button onClick={proModal.onOpen} className="w-full" variant="premium">
+                        Upgrades
                         <Zap className="w-4 h-4 ml-2 fill-white" />
-                    </Button>
+                    </Button> */}
+                    {showTimer && limitCount >= MAX_FREE_COUNTS && <Timer initialSeconds={5} onEnd={handleTimerEnd} />}
+
                 </CardContent>
             </Card>
         </div>
