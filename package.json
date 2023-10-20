@@ -21,6 +21,7 @@
     "axios": "^1.5.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "crisp-sdk-web": "^1.0.21",
     "encoding": "^0.1.13",
     "lucide-react": "^0.279.0",
     "next": "latest",
