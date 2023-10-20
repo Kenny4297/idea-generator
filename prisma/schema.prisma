@@ -29,3 +29,11 @@ model UserTimer {
   userId    String   @unique
   startTime DateTime @default(now())
 }
+
+// When updating a mode:
+
+// npx prisma generate
+
+// Then
+
+// npx prisma db push

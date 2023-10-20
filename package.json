@@ -28,6 +28,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.47.0",
+    "react-hot-toast": "^2.4.1",
     "replicate": "^0.20.1",
     "stripe": "^14.1.0",
     "tailwind-merge": "^1.14.0",

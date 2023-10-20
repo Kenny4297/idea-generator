@@ -58,10 +58,6 @@ export const FreeCounter = ({apiLimitCount = 0}: FreeCounterProps) => {
 
                         <Progress className="h-3" value={apiLimitCount / MAX_FREE_COUNTS * 100 }  />
                     </div>
-                    {/* <Button onClick={proModal.onOpen} className="w-full" variant="premium">
-                        Upgrades
-                        <Zap className="w-4 h-4 ml-2 fill-white" />
-                    </Button> */}
                     {showTimer && limitCount >= MAX_FREE_COUNTS && <Timer initialSeconds={5} onEnd={handleTimerEnd} />}
 
                 </CardContent>
