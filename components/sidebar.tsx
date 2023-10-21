@@ -43,11 +43,6 @@ const routes = [
     href: "/music",
     color: "text-emerald-500"
   },
-  {
-    label: "Settings", 
-    icon: Settings,
-    href: "/settings",
-  }
 ]
 
 interface SidebarProps {

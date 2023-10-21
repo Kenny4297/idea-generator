@@ -6,7 +6,9 @@ import { getApiLimitCount } from '@/lib/api-limit'
 const DashboardLayout = async ({
     children
 }: {children: React.ReactNode}) => {
+
   const apiLimitCount = await getApiLimitCount();
+
 
 
   return (

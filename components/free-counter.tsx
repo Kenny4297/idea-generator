@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "./ui/card";
 import { MAX_FREE_COUNTS } from "@/constants";
 import { Progress } from "./ui/progress";
@@ -10,39 +10,77 @@ import { useProModal } from "@/hooks/use-pro-model";
 import Timer from "./timer";
 import { getApiLimitCount } from "@/lib/api-limit";
 
-
 interface FreeCounterProps {
-    apiLimitCount: number
+    apiLimitCount: number;
 }
 
-
-export const FreeCounter = ({apiLimitCount = 0}: FreeCounterProps) => {
+export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
     const proModal = useProModal();
-    
-    const [mounted, setMounted] = useState(false);
 
+    const [mounted, setMounted] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
 
-    const [limitCount, setLimitCount] = useState<number>(apiLimitCount);
+    const [localApiLimitCount, setLocalApiLimitCount] = useState(apiLimitCount);
+
+    const fetchApiLimitCount = async () => {
+        try {
+            const response = await fetch("/api/apiLimit");
+            if (response.ok) {
+                const data = await response.json();
+                console.log("The current data.apiLimitCount is", data.apiLimitCount);
+                console.log("The current data is", data);
+
+                setLocalApiLimitCount(data.apiLimitCount); // <-- Update the local state here
+            } else {
+                throw new Error("Failed to fetch apiLimitCount");
+            }
+        } catch (error) {
+            console.log("Caught an error:", error);
+            console.error("Error fetching apiLimitCount:", error);
+        }
+    };
+
+    const resetApiLimitCountOnServer = async () => {
+        try {
+            const response = await fetch("/api/timer", { method: "PUT" });
+
+            if (!response.ok) {
+                console.error("Failed to reset API limit:", response.statusText);
+            } else {
+                // const updatedApiLimit = await fetch('/api/timer');
+                console.log("The updated ApiLimit is", response);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
     useEffect(() => {
-        setMounted(true)
-        console.log("the Api limit count is", apiLimitCount)
+        fetchApiLimitCount();
+    }, []);
+
+    useEffect(() => {
+        setMounted(true);
+        console.log("the Api limit count is", apiLimitCount);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
     useEffect(() => {
-        if (apiLimitCount >= MAX_FREE_COUNTS) {
+        if (localApiLimitCount >= MAX_FREE_COUNTS) {
             setShowTimer(true);
         }
+    }, [localApiLimitCount]);
+
+    useEffect(() => {
+        setLocalApiLimitCount(apiLimitCount);
     }, [apiLimitCount]);
 
     const handleTimerEnd = async (updatedCount: number) => {
-        // This function is triggered when the timer ends
-        // You can re-fetch the `apiLimitCount` from your server or simply set it to 0
-        setLimitCount(updatedCount); // Assuming you want to reset it
+        await resetApiLimitCountOnServer();
+        await fetchApiLimitCount();
+        console.log("the The Api limit count is", apiLimitCount);
+        setShowTimer(false);
     };
-    
 
     if (!mounted) {
         return null;
@@ -52,17 +90,17 @@ export const FreeCounter = ({apiLimitCount = 0}: FreeCounterProps) => {
         <div className="px-3 pb-5">
             <Card className="bg-white/10 border-0">
                 <CardContent className="py-6">
-                    <div className="text-center text-sm text-white mb-4 space-y-2"> 
+                    <div className="text-center text-sm text-white mb-4 space-y-2">
                         <p>
-                            {limitCount} / {MAX_FREE_COUNTS} FREE GENERATIONS
+                            {localApiLimitCount} / {MAX_FREE_COUNTS} FREE GENERATIONS
                         </p>
 
-                        <Progress className="h-3" value={apiLimitCount / MAX_FREE_COUNTS * 100 }  />
-                    </div>
-                    {showTimer && limitCount >= MAX_FREE_COUNTS && <Timer initialSeconds={5} onEnd={handleTimerEnd} />}
+                        <Progress className="h-3" value={(localApiLimitCount / MAX_FREE_COUNTS) * 100} />
 
+                    </div>
+                    {showTimer && apiLimitCount >= MAX_FREE_COUNTS && <Timer initialSeconds={5} onEnd={handleTimerEnd} />}
                 </CardContent>
             </Card>
         </div>
-    )
-}
+    );
+};

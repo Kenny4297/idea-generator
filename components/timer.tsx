@@ -19,20 +19,21 @@ const Timer = ({ initialSeconds, onEnd }: TimerProps) => {
     const handleTimerEnd = async () => {
         try {
             const response = await fetch('/api/timer', { method: 'PUT' });
-    
+            
             if (!response.ok) {
                 console.error('Failed to reset API limit:', response.statusText);
             } else {
                 const updatedApiLimit = await fetch('/api/apiLimit');
                 const { apiLimitCount: updatedCount } = await updatedApiLimit.json();
-                
-                // Invoke the provided callback with the new count
+    
+                // Assuming updatedCount is now 0, invoke the callback
                 onEnd(updatedCount);
             }
         } catch (error) {
             console.error('Error:', error);
         }
     };
+    
     
     useEffect(() => {
         const interval = setInterval(() => {
