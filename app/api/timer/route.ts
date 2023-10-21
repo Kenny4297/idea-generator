@@ -1,9 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
 import { auth } from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(req: NextApiRequest, res: NextApiResponse) {
+export async function PUT(req: Request | NextRequest, res: NextApiResponse) {
   console.log("Reset ApiLImit Handler function firing!");
 
   try {
