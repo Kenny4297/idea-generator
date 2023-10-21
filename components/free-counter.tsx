@@ -28,6 +28,7 @@ export const FreeCounter = ({apiLimitCount = 0}: FreeCounterProps) => {
     useEffect(() => {
         setMounted(true)
         console.log("the Api limit count is", apiLimitCount)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {

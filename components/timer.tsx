@@ -45,6 +45,7 @@ const Timer = ({ initialSeconds, onEnd }: TimerProps) => {
         }, 1000);
     
         return () => clearInterval(interval);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [seconds]);
 
     const { hrs, mins, secs } = formatTime(seconds);
