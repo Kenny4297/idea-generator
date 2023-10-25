@@ -4,19 +4,13 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "./ui/card";
 import { MAX_FREE_COUNTS } from "@/constants";
 import { Progress } from "./ui/progress";
-import { Button } from "./ui/button";
-import { Zap } from "lucide-react";
-import { useProModal } from "@/hooks/use-pro-model";
 import Timer from "./timer";
-import { getApiLimitCount } from "@/lib/api-limit";
 
 interface FreeCounterProps {
     apiLimitCount: number;
 }
 
 export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
-    const proModal = useProModal();
-
     const [mounted, setMounted] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
 
@@ -30,7 +24,7 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
                 console.log("The current data.apiLimitCount is", data.apiLimitCount);
                 console.log("The current data is", data);
 
-                setLocalApiLimitCount(data.apiLimitCount); // <-- Update the local state here
+                setLocalApiLimitCount(data.apiLimitCount); 
             } else {
                 throw new Error("Failed to fetch apiLimitCount");
             }
@@ -47,7 +41,6 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
             if (!response.ok) {
                 console.error("Failed to reset API limit:", response.statusText);
             } else {
-                // const updatedApiLimit = await fetch('/api/timer');
                 console.log("The updated ApiLimit is", response);
             }
         } catch (error) {
@@ -87,7 +80,7 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
     }
 
     return (
-        <div className="px-3 pb-5">
+        <div className="px-3 pb-24">
             <Card className="bg-white/10 border-0">
                 <CardContent className="py-6">
                     <div className="text-center text-sm text-white mb-4 space-y-2">

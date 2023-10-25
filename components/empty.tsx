@@ -3,7 +3,6 @@ import Image from 'next/image'
 
 interface EmptyProps {
     label: string;
-
 }
 
 export const Empty = ({label} : EmptyProps) => {

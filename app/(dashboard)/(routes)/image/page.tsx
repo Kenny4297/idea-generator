@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Heading from '@/components/heading'
-import { Download, ImageIcon } from 'lucide-react'
+import { Download, Camera } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod';
 import { useRouter } from 'next/navigation'
@@ -13,22 +13,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import OpenAI from 'openai'
 
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
 
-import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardFooter } from '@/components/ui/card';
 import Image from 'next/image';
-import { useProModal } from '@/hooks/use-pro-model';
 import toast from 'react-hot-toast';
 
 
 
 const ImagePage = () => {
-    const proModal = useProModal();
     const router = useRouter();
     const [images, setImages] = useState<string[]>([])
 
@@ -55,11 +51,7 @@ const ImagePage = () => {
 
             form.reset()
         } catch (error: any) {
-            if (error?.response?.status === 403) {
-                proModal.onOpen();
-            } else {
-                toast.error("Something went wrong")
-            }
+            toast.error("Something went wrong")
         } finally {
             router.refresh();
         }
@@ -67,7 +59,7 @@ const ImagePage = () => {
 
   return (
     <div>
-        <Heading title="Image Generation" description="Generate an image from your prompt" icon={ImageIcon} iconColor="text-pink-700" bgColor="bg-pink-700/10" />
+        <Heading title="Image Generation" description="Generate an image from your prompt" icon={Camera} iconColor="text-emerald-700" bgColor="bg-emerald-700/10" />
         <div className='px-4 lg:px-8'>
             <div>
                 <Form {...form}>

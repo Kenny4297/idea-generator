@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Heading from '@/components/heading'
-import { Music } from 'lucide-react'
+import { Volume2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod';
 import { useRouter } from 'next/navigation'
@@ -13,17 +13,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import OpenAI from 'openai'
 
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
-import { redirectToSignUp } from '@clerk/nextjs';
-import { useProModal } from '@/hooks/use-pro-model';
 import toast from 'react-hot-toast';
 
-
 const MusicPage = () => {
-    const proModal = useProModal();
     const router = useRouter()
     const [music, setMusic] = useState<string>();
 
@@ -46,11 +41,7 @@ const MusicPage = () => {
             form.reset()
 
         } catch (error: any) {
-            if (error?.response?.status === 403) {
-                proModal.onOpen();
-            } else {
-                toast.error("Something went wrong")
-            }
+            toast.error("Something went wrong")
         } finally {
             router.refresh();
         }
@@ -58,7 +49,7 @@ const MusicPage = () => {
 
   return (
     <div>
-        <Heading title="Music Generation" description="Turn your prompt into music." icon={Music} iconColor="text-emerald-500" bgColor="bg-emerald-500/10" />
+        <Heading title="Music Generation" description="Turn your prompt into music." icon={Volume2} iconColor="text-indigo-500" bgColor="bg-indigo-500/10" />
         <div className='px-4 lg:px-8'>
             <div>
                 <Form {...form}>

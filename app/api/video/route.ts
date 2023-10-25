@@ -4,7 +4,6 @@ import Replicate from 'replicate'
 
 import { increaseApiLimit, checkApiLimit } from '@/lib/api-limit';
 
-
 const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN
 })

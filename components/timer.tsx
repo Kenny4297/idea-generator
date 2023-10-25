@@ -26,7 +26,6 @@ const Timer = ({ initialSeconds, onEnd }: TimerProps) => {
                 const updatedApiLimit = await fetch('/api/apiLimit');
                 const { apiLimitCount: updatedCount } = await updatedApiLimit.json();
     
-                // Assuming updatedCount is now 0, invoke the callback
                 onEnd(updatedCount);
             }
         } catch (error) {

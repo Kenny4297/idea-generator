@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowRight, ImageIcon, MessageSquare, Music, VideoIcon } from "lucide-react";
+import { ArrowRight, Camera, Volume2, MonitorPlay, MessageCircle } from "lucide-react";
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { useRouter } from "next/navigation";
@@ -8,28 +8,28 @@ import { useRouter } from "next/navigation";
 const tools = [
   {
     label: "Conversation",
-    icon: MessageSquare,
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
+    icon: MessageCircle,
+    color: "text-pink-500",
+    bgColor: "bg-pink-500/10",
     href: "/conversation"
   },
   {
     label: "Music Generation",
-    icon: Music,
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
+    icon: Volume2,
+    color: "text-indigo-500",
+    bgColor: "bg-indigo-500/10",
     href: "/music"
   },
   {
     label: "Image Generation",
-    icon: ImageIcon,
-    color: "text-pink-700",
-    bgColor: "bg-pink-700/10",
+    icon: Camera,
+    color: "text-emerald-700",
+    bgColor: "bg-emerald-700/10",
     href: "/image"
   },
   {
     label: "Video Generation",
-    icon: VideoIcon,
+    icon: MonitorPlay,
     color: "text-orange-700",
     bgColor: "bg-orange-700/10",
     href: "/video"
@@ -53,7 +53,7 @@ const DashboardPage = () => {
                   <tool.icon className={cn("w-8 h-8", tool.color)} />
                 </div>
 
-                <div className="font-semibold">
+                <div className="font-semibold px-2">
                   {tool.label}
                 </div>
               </div>
