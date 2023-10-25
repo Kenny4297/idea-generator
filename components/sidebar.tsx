@@ -40,13 +40,13 @@ const routes = [
     bgColor: "bg-emerald-700/10",
     href: "/image"
   },
-  {
-    label: "Video Generation",
-    icon: MonitorPlay,
-    color: "text-orange-700",
-    bgColor: "bg-orange-700/10",
-    href: "/video"
-  },
+  // {
+  //   label: "Video Generation",
+  //   icon: MonitorPlay,
+  //   color: "text-orange-700",
+  //   bgColor: "bg-orange-700/10",
+  //   href: "/video"
+  // },
 ]
 
 interface SidebarProps {
