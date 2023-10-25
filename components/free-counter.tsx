@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Card, CardContent } from "./ui/card";
 import { MAX_FREE_COUNTS } from "@/constants";
 import { Progress } from "./ui/progress";
-import Timer from "./timer";
 
 interface FreeCounterProps {
     apiLimitCount: number;
@@ -34,20 +33,6 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
         }
     };
 
-    const resetApiLimitCountOnServer = async () => {
-        try {
-            const response = await fetch("/api/timer", { method: "PUT" });
-
-            if (!response.ok) {
-                console.error("Failed to reset API limit:", response.statusText);
-            } else {
-                console.log("The updated ApiLimit is", response);
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
-
     useEffect(() => {
         fetchApiLimitCount();
     }, []);
@@ -68,13 +53,6 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
         setLocalApiLimitCount(apiLimitCount);
     }, [apiLimitCount]);
 
-    const handleTimerEnd = async (updatedCount: number) => {
-        await resetApiLimitCountOnServer();
-        await fetchApiLimitCount();
-        console.log("the The Api limit count is", apiLimitCount);
-        setShowTimer(false);
-    };
-
     if (!mounted) {
         return null;
     }
@@ -91,7 +69,7 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
                         <Progress className="h-3" value={(localApiLimitCount / MAX_FREE_COUNTS) * 100} />
 
                     </div>
-                    {showTimer && apiLimitCount >= MAX_FREE_COUNTS && <Timer initialSeconds={86400} onEnd={handleTimerEnd} />}
+                    {showTimer && apiLimitCount >= MAX_FREE_COUNTS && <p className="text-white text-center">Email me at <span className="text-emerald-300">geckob4i@gmail.com</span> for more generations</p>}
                 </CardContent>
             </Card>
         </div>
