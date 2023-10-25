@@ -5,7 +5,7 @@ import Replicate from 'replicate'
 import { increaseApiLimit, checkApiLimit } from '@/lib/api-limit';
 
 const replicate = new Replicate({
-    auth: process.env.REPLICATE_API_TOKEN
+    auth: process.env.REPLICATE_API_TOKEN,
 })
 
 export async function POST(
@@ -42,9 +42,6 @@ export async function POST(
           await increaseApiLimit();
         
           return NextResponse.json(response)
-
-
-
 
     } catch (error) {
         console.log("[VIDEO_ERROR]", error);
