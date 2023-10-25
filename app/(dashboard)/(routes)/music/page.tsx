@@ -41,7 +41,7 @@ const MusicPage = () => {
             form.reset()
 
         } catch (error: any) {
-            toast.error("Something went wrong")
+            toast.error("Something went wrong. It was most likely due to the complexity of your request. Try something more simple.")
         } finally {
             router.refresh();
         }
@@ -57,7 +57,7 @@ const MusicPage = () => {
                         <FormField name="prompt" render={({field}) => (
                             <FormItem className='col-span-12 lg:col-span-10'>
                                 <FormControl className="m-0 p-0">
-                                    <Input className="border-0 outline-none focus-visible:ring-transparent" disabled={isLoading} placeholder='Piano Solo' {...field} />
+                                    <Input className="border-0 outline-none focus-visible:ring-transparent" disabled={isLoading} placeholder='Bass Line' {...field} />
                                 </FormControl>
                             </FormItem>
 

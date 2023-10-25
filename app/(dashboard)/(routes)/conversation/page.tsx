@@ -52,7 +52,7 @@ const ConversationPage = () => {
             form.reset()
 
         } catch (error: any) {
-            toast.error("Something went wrong")
+            toast.error("Something went wrong. It was most likely due to the complexity of your request. Try something more simple.")
         } finally {
             router.refresh();
         }

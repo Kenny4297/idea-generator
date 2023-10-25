@@ -51,7 +51,7 @@ const ImagePage = () => {
 
             form.reset()
         } catch (error: any) {
-            toast.error("Something went wrong")
+            toast.error("Something went wrong. It was most likely due to the complexity of your request. Try something more simple.")
         } finally {
             router.refresh();
         }
@@ -65,14 +65,14 @@ const ImagePage = () => {
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2">
                         <FormField name="prompt" render={({field}) => (
-                            <FormItem className='col-span-12 lg:col-span-6'>
+                            <FormItem className='col-span-12 lg:col-span-10'>
                                 <FormControl className="m-0 p-0">
-                                    <Input className="border-0 outline-none focus-visible:ring-transparent" disabled={isLoading} placeholder='A picture of a horse in the swiss alps' {...field} />
+                                    <Input className="border-0 outline-none focus-visible:ring-transparent" disabled={isLoading} placeholder='A picture of a horse' {...field} />
                                 </FormControl>
                             </FormItem>
 
                         )} />
-                        <FormField name="amount" control={form.control} render={({ field }) => (
+                        {/* <FormField name="amount" control={form.control} render={({ field }) => (
                             <FormItem className="col-span-12 lg:col-span-2">
                                 <Select disabled={isLoading} onValueChange={field.onChange} value={field.value} defaultValue={field.value}>
                                     <FormControl>
@@ -111,7 +111,7 @@ const ImagePage = () => {
                                     </SelectContent>
                                 </Select>
                             </FormItem>
-                        )} />
+                        )} /> */}
                         <Button className="col-span-12 lg:col-span-2 w-full" disabled={isLoading}>
                             Generate
                         </Button>

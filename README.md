@@ -1,9 +1,11 @@
 # **Idea Generator**
-<img src="./public/images/OlivierWebsiteScreenshotEdited2.png" alt="Screenshot for the Home page" width="1000"/>
+<img src="./assets/IdeaGeneratorLandingPage.png" alt="Screenshot for the Landing Page" width="1000"/>
 
 ## **Table of Contents**
 - [License](#license)
 - [Project Overview](#project-overview)
+- [Dashboard](#dashboard)
+- [Conversation](#conversation)
 - [Unique Technologies](#unique-technologies)
 - [Technologies Used](#technologies-used)
 - [Deployment](#Deployment)
@@ -12,28 +14,48 @@
 This project is licensed under the MIT license.
 
 ## **Project Overview**
-A fully responsive website for my real estate client Olivier Chabin. Experience seamless navigation by exploring his journey, services, and effortlessly get in touch. All this in a responsive, user-friendly application.
+Using the intelligence of A.I., this Idea Generator creates unique ideas in the form of text, images, and sound. Each user gets 5 uses before a 24 hour cool down is initiated. 
+
+## **Dashboard**
+<img src="./assets/IdeaGeneratorDashboard.png" alt="Screenshot for the Landing Page" width="1000"/>
+
+## **Conversation**
+<img src="./assets/IdeaGeneratorConversation.png" alt="Screenshot for the Landing Page" width="1000"/>
+
+## **Music**
+<img src="./assets/IdeaGeneratorMusic.png" alt="Screenshot for the Landing Page" width="1000"/>
+
+## **Image**
+<img src="./assets/IdeaGeneratorImage.png" alt="Screenshot for the Landing Page" width="1000"/>
 
 ## **Unique Technologies**
-**Next.js**
+**Open AI API**
 
-Next.js is a leading framework for building React applications with robust functionality. It allows developers to build static, dynamic, or server-rendered React applications with ease and efficiency. With Next.js, we ensured our platform’s performance and scalability, delivering a seamless, fast browsing experience for users. The framework's automatic code splitting, file-system based routing, and extensive plugin support make it a powerful tool for developing optimized, production-ready applications. Its comprehensive documentation and strong community support further smooth the development process, allowing for the easy integration of cutting-edge features and enhancements into our project.
+The OpenAI API is a digital interface provided by OpenAI that allows developers, researchers, and businesses to access and utilize OpenAI's state-of-the-art machine learning models, most notably models like GPT-3 and GPT-4. Through this API, users can integrate the capabilities of these models into their applications, websites, and services, enabling a wide range of functionalities, from natural language processing to content generation, translation, and much more. By providing such an interface, OpenAI has democratized access to advanced AI technologies, making it easier for innovators worldwide to build and deploy AI-driven solutions without the need to train their own models or invest heavily in computational infrastructure.
 
-**Framer Motion**
+**Clerk**
 
-Framer Motion is a renowned animation library for React, allowing developers to create fluid, interactive animations with ease and precision. By utilizing Framer Motion, our platform delivers intuitive, visually engaging user experiences, enhancing user interactions and interface navigation. Its straightforward syntax and robust feature set empower developers to implement complex animations without the need for extensive coding, making it a highly efficient tool for enhancing UI/UX design. Framer Motion's comprehensive documentation and active community support further facilitate seamless integration into our project, ensuring the seamless operation and aesthetic appeal of our application’s animated elements.
+Clerk Auth is a user authentication and authorization service that provides developers with a simple and secure way to add authentication to their applications. Clerk Auth supports a variety of authentication methods, including email/password, social login, and two-factor authentication. It also provides a variety of features to help developers manage their users, such as user profiles, user groups, and user roles.
 
-**Tailwind CSS**
+**Shadcn UI**
 
-Tailwind CSS is a highly efficient utility-first CSS framework that allows developers to craft unique, responsive designs with ease and speed. Employing Tailwind CSS ensures that our platform stands out with a tailored and cohesive visual theme while maintaining optimal performance. It enables precise control over the layout and style without the verbosity typically associated with writing custom CSS, promoting faster development cycles and cleaner codebases. The extensive documentation and vast, supportive community surrounding Tailwind CSS make the integration straightforward, providing developers with a robust toolset to bring their design visions to life while ensuring cross-browser compatibility and responsiveness across all screen sizes.
+Shadcn UI is a collection of reusable components built using Radix UI and Tailwind CSS. It is not a component library, but rather a set of components that you can copy and paste into your apps. The components are accessible and customizable, and they are designed to be used together to create beautiful and user-friendly interfaces.
 
 ## **Technologies Used**
+Front End
+
+* Open AI API
 * Next.js
 * React.js
-* JavaScript
+* TypeScript
 * Tailwind CSS
 * HTML5
-* Framer Motion
+* Shadcn UI
+* Clerk
+
+Back End
+* Prisma
+* MySQL
 
 ## **Deployment**
-[Deployment Link](https://olivier-chabin.vercel.app/)
+[Deployment Link](https://kedgards-idea-generator.vercel.app/)

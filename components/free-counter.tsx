@@ -91,7 +91,7 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
                         <Progress className="h-3" value={(localApiLimitCount / MAX_FREE_COUNTS) * 100} />
 
                     </div>
-                    {showTimer && apiLimitCount >= MAX_FREE_COUNTS && <Timer initialSeconds={5} onEnd={handleTimerEnd} />}
+                    {showTimer && apiLimitCount >= MAX_FREE_COUNTS && <Timer initialSeconds={86400} onEnd={handleTimerEnd} />}
                 </CardContent>
             </Card>
         </div>
