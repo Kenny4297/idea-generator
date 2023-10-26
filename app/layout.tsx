@@ -4,12 +4,14 @@ import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ToasterProvider } from '@/components/toaster-provider'
 import Head from 'next/head'
+import Favicon from '/public/favicon.ico';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Idea Generator',
   description: 'AI Platform',
+  icons: [{ rel: 'icon', url: Favicon.src }],
 }
  
 export default function RootLayout({
