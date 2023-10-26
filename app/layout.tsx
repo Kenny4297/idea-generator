@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ToasterProvider } from '@/components/toaster-provider'
-import Head from 'next/head'
 import Favicon from '/public/favicon.ico';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,9 +21,6 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
         <body className={inter.className}>
           <ToasterProvider />
           {children}</body>
