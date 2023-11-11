@@ -20,10 +20,8 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
             const response = await fetch("/api/apiLimit");
             if (response.ok) {
                 const data = await response.json();
-                console.log("The current data.apiLimitCount is", data.apiLimitCount);
-                console.log("The current data is", data);
 
-                setLocalApiLimitCount(data.apiLimitCount); 
+                setLocalApiLimitCount(data.apiLimitCount);
             } else {
                 throw new Error("Failed to fetch apiLimitCount");
             }
@@ -39,7 +37,6 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
 
     useEffect(() => {
         setMounted(true);
-        console.log("the Api limit count is", apiLimitCount);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -67,9 +64,12 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
                         </p>
 
                         <Progress className="h-3" value={(localApiLimitCount / MAX_FREE_COUNTS) * 100} />
-
                     </div>
-                    {showTimer && apiLimitCount >= MAX_FREE_COUNTS && <p className="text-white text-center">Email me at <span className="text-emerald-300">geckob4i@gmail.com</span> for more generations</p>}
+                    {showTimer && apiLimitCount >= MAX_FREE_COUNTS && (
+                        <p className="text-white text-center">
+                            Email me at <span className="text-emerald-300">geckob4i@gmail.com</span> for more generations
+                        </p>
+                    )}
                 </CardContent>
             </Card>
         </div>
